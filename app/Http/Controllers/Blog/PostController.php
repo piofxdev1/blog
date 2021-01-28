@@ -58,6 +58,8 @@ class PostController extends Controller
         // Retrieve all tags
         $tags = $tag->getRecords();
 
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
+
         return view("apps.".$this->app.".".$this->module.".createEdit")
                 ->with("stub", "create")
                 ->with("app", $this)
@@ -74,11 +76,9 @@ class PostController extends Controller
      */
     public function store(Obj $obj, Request $request)
     {
-        // ddd($request->all());
         // Authorize the request
         $this->authorize('create', $obj);
-        // Store the records
-
+        
         // Check for when to publish
         if($request->input('publish') == "now" ){
             $status = 1;
@@ -86,7 +86,8 @@ class PostController extends Controller
         else if($request->input('publish') == "save_as_draft"){
             $status = 0;
         }   
-
+        
+        // Store the records
         $obj = $obj->create($request->all() + ['status' => $status]);
 
         if($request->input('tag_ids')){
@@ -124,13 +125,16 @@ class PostController extends Controller
      */
     public function edit($slug, Obj $obj, Category $category, Tag $tag)
     {
-
         // Retrieve Specific record
         $obj = $obj->getRecord($slug);
+        // Authorize the request
+        $this->authorize('create', $obj);
         // Retrieve all categories
         $categories = $category->getRecords();
         // Retrieve all tags
         $tags = $tag->getRecords();
+
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
         return view("apps.".$this->app.".".$this->module.".createEdit")
                 ->with("stub", "update")
@@ -201,10 +205,12 @@ class PostController extends Controller
 
     // List all Posts
     public function list(Obj $obj){
-        // Authorize the request
-        $this->authorize('create', $obj);
         // Retrieve all records
         $objs = $obj->getRecords(5, 'asc');
+        // Authorize the request
+        $this->authorize('create', $obj);
+
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
         return view("apps.".$this->app.".".$this->module.".posts")
                 ->with("app", $this)

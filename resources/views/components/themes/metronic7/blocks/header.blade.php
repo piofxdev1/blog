@@ -5,62 +5,48 @@
 		<!--begin::Container-->
 		<div class="container">
 			<!--begin::Left-->
-			<div class="d-none d-lg-flex align-items-center mr-3">
+			<div class="d-flex align-items-center">
 				<!--begin::Logo-->
-				<a href="index.html" class="mr-20">
-					<img alt="Logo" src="{{ asset('piofx_white.png')}}" class="max-h-45px" />
-				</a>
+					<a href="{{ route('Post.index') }}" class="mr-20">
+						<img alt="Logo" src="{{ asset('img/logos/piofx-white.png')}}" class="max-h-45px" />
+					</a>
 				<!--end::Logo-->
 				<!--begin::Tab Navs(for desktop mode)-->
-				<ul class="header-tabs nav  font-size-lg" role="tablist">
-					<!--begin::Item-->
-					<li class="nav-item">
-						<a href="" class="nav-link py-4 px-6 " >Dashboard</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<a href="" class="nav-link py-4 px-6 " >Clients</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<a href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Users</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<a href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Pages</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<a href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Blog</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<a href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Settings</a>
-					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="nav-item mr-3">
-						<form method="POST" action="{{ route('logout') }}">
-						@csrf
-						<a href="#" class="nav-link py-4 px-6"  onclick="event.preventDefault();
-                                                this.closest('form').submit();"
-						>Logout</a>
-						</form>
-					</li>
-					<!--end::Item-->
-				</ul>
+				<div class="col-9 d-flex justify-content-center align-items-center">
+					<a href="{{ route('Post.index') }}" class="nav-link text-decoration-none text-white">Home</a>
+					<a href="{{ route('Post.list') }}" class="nav-link text-decoration-none text-white">Posts</a>
+					<a href="{{ route('Category.index') }}" class="nav-link text-decoration-none text-white">Categories</a>
+					<a href="{{ route('Tag.index') }}" class="nav-link text-decoration-none text-white">Tags</a>
+				</div>
+
 				<!--begin::Tab Navs-->
 			</div>
 			<!--end::Left-->
 			<!--begin::Topbar-->
-			<div class="topbar ">
+			<div class="topbar">
+				<!-- Begin Login, Register -->
+				@if (Route::has('login'))
+					<div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+						@auth
+							<div class="nav-item mr-3">
+								<form method="POST" action="{{ route('logout') }}">
+								@csrf
+									<a href="#" class="btn btn-danger"  onclick="event.preventDefault();
+															this.closest('form').submit();">
+										Logout
+									</a>
+								</form>
+							</div>
+						@else
+							<a href="{{ route('login') }}" class="btn btn-primary">Login</a>
 
-
+							@if (Route::has('register'))
+								<a href="{{ route('register') }}" class="btn btn-dark ml-4 ">Register</a>
+							@endif
+						@endauth
+					</div>
+                @endif
+                <!-- End Login, Register -->
 				<!--begin::User-->
 				<div class="topbar-item">
 					<div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">

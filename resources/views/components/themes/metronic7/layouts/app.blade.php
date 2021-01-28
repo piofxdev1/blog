@@ -12,7 +12,7 @@
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled page-loading">
+	<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled page-loading bg-light">
 		<!--begin::Main-->
 		
 		@include('components.themes.metronic7.blocks.header_mobile')

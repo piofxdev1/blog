@@ -4,8 +4,8 @@
         <!-- Nav -->
         <nav class="navbar navbar-expand-lg d-flex justify-content-between">
             <!-- Logo -->
-            <a href="/blog" aria-label="Front">
-                <img src="{{ asset('themes/front/img/piofx-black.png') }}" width="100" alt="Logo">
+            <a href="/blog" aria-label="Logo">
+                <img src="{{ asset('img/logos/piofx-black.png') }}" width="100" alt="Logo">
             </a>
             <!-- End Logo -->
 

@@ -27,8 +27,12 @@ class TagController extends Controller
     
     public function index(Obj $obj)
     {
+        // Authorize the request
+        $this->authorize('create', $obj);
         // Retrieve all records
         $objs = $obj->getRecords();
+
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
         return view("apps.".$this->app.".".$this->module.".index")
                 ->with("app", $this)
@@ -62,6 +66,8 @@ class TagController extends Controller
         // authorize the app
         $this->authorize('create', $obj);
 
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
+
         return view("apps.".$this->app.".".$this->module.".createEdit")
                 ->with('stub', "create")
                 ->with("app", $this)
@@ -82,6 +88,8 @@ class TagController extends Controller
     {
         // Retrieve Specific record
         $obj = $obj->getRecord($slug);
+
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
         return view("apps.".$this->app.".".$this->module.".createEdit")
                 ->with("stub", "update")

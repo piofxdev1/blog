@@ -19,9 +19,9 @@ class Category extends Model
     protected $fillable = ['name','slug','image','description'];
 
     // retrieve all records
-    public function getRecords(){
-		$posts = Cache::remember('posts', 60, function(){
-			return $this->with('posts')->get();
+    public function getRecords($limit){
+		$posts = Cache::remember('posts', 60, function() use($limit){
+			return $this->with('posts')->paginate($limit);
 		});
 		return $posts;
     }

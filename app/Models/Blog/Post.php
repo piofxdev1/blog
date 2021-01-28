@@ -10,17 +10,20 @@ use App\Models\User;
 // use App\Models\Core\Client;
 use App\Models\Blog\Category;
 use App\Models\Blog\Tag;
+use Kyslik\ColumnSortable\Sortable;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     // The attributes that are mass assignable
-    protected $fillable = ["title", "slug", "category_id", "tag_id", "image", "excerpt", "content", "meta_title", "meta_description", "status", "published_at"];
+	protected $fillable = ["title", "slug", "category_id", "tag_id", "image", "excerpt", "content", "meta_title", "meta_description", "status", "published_at"];
+	
+	public $sortable = ["id", "title", "created_at"];
 
     // Retrieve all posts
     public function getRecords($limit, $order){
-        return $this->orderBy("id", $order)->simplePaginate($limit);
+        return $this->sortable()->orderBy("id", $order)->paginate($limit);
     }
 
     // Retrieve specific record based on slug

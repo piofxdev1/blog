@@ -26,8 +26,12 @@ class CategoryController extends Controller
   
     public function index(Obj $obj)
     {
+        // Authorize the request
+        $this->authorize('view', $obj);
         // Retrieve all records
-        $objs = $obj->getRecords();
+        $objs = $obj->getRecords(10);
+
+        $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
         return view("apps.".$this->app.".".$this->module.".index")
                 ->with("app", $this)
@@ -45,7 +49,7 @@ class CategoryController extends Controller
       $posts = $post->where("category_id", $id)->simplePaginate(5);
 
       // Retrieve all categories
-      $objs = $obj->getRecords();
+      $objs = $obj->getRecords(10);
       // Retrieve all tags
       $tags = $tag->getRecords();
               
@@ -61,6 +65,8 @@ class CategoryController extends Controller
     {
       // authorize the app
       $this->authorize('create', $obj);
+
+      $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
       return view("apps.".$this->app.".".$this->module.".createEdit")
             ->with('stub', "create")
@@ -82,6 +88,10 @@ class CategoryController extends Controller
     {
       // Retrieve Specific record
       $obj = $obj->getRecord($slug);
+      // Authorize the request
+      $this->authorize('create', $obj);
+
+      $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 
       return view("apps.".$this->app.".".$this->module.".createEdit")
               ->with("stub", "update")
