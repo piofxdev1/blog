@@ -63,7 +63,7 @@ class PostController extends Controller
         return view("apps.".$this->app.".".$this->module.".createEdit")
                 ->with("stub", "create")
                 ->with("app", $this)
-                ->with("objs", $obj)
+                ->with("obj", $obj)
                 ->with("categories", $categories)
                 ->with("tags", $tags);
     }
@@ -153,6 +153,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Obj $obj, $id)
     {
+
         // load the resource
         $obj = Obj::where('id',$id)->first();
         // authorize the app
@@ -167,7 +168,17 @@ class PostController extends Controller
         }   
 
         //update the resource
-        $obj = $obj->update($request->all() + ['status' => $status]);
+        $obj->update($request->all() + ['status' => $status]);
+
+        $obj->tags()->detach();
+
+        if($request->input('tag_ids')){
+            foreach($request->input('tag_ids') as $tag_id){
+                if(!$obj->tags->contains($tag_id)){
+                    $obj->tags()->attach($tag_id);
+                }
+            }
+        }
         
         return redirect()->route($this->module.'.list');
     }
@@ -215,6 +226,11 @@ class PostController extends Controller
         return view("apps.".$this->app.".".$this->module.".posts")
                 ->with("app", $this)
                 ->with("objs", $objs);    
+    }
+
+    public function upload(Request $request){
+        $imgpath = $request->file('file')->store('post', 'public');
+        return response()->json(['location' => "/storage/$imgpath"]);
     }
 
 }

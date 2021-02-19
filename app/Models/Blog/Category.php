@@ -8,20 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 // use App\Models\Core\Client;
 use App\Models\Blog\Post;
+use Kyslik\ColumnSortable\Sortable;
 
 use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     // The attributes that are mass assignable
-    protected $fillable = ['name','slug','image','description'];
+	protected $fillable = ['name','slug','image','description'];
+
+	public $sortable = ["id", "title", "created_at"];
 
     // retrieve all records
-    public function getRecords($limit){
-		$posts = Cache::remember('posts', 60, function() use($limit){
-			return $this->with('posts')->paginate($limit);
+    public function getRecords(){
+		$posts = Cache::remember('posts', 60, function(){
+			return $this->sortable()->orderBy('id', 'asc')->with('posts')->get();
 		});
 		return $posts;
     }

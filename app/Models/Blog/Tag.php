@@ -8,16 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 // use App\Models\Core\Client;
 use App\Models\Blog\Post;
+use Kyslik\ColumnSortable\Sortable;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $fillable = ["name"];
 
     // retrieve all records
     public function getRecords(){
-        return Tag::all();
+        return $this->sortable()->orderBy('id', 'asc')->get();
     }
 
     // Retrieve specific record based on slug

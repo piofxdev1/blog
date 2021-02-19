@@ -16,9 +16,9 @@
 <script src="https://cdn.tiny.cloud/1/uf9ks88mbg3hxvgbpgvohq8gb9snzsutwzjeo2h95vcu9pef/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <!-- Bootstrap -->
-<!-- <link href="{{ asset('themes/metronic/css/style.bundle.min.css') }} " rel="stylesheet" type="text/css" /> -->
-<!-----bootstrap links--------->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet" type="text/css" />
+
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" href="{{ asset('css/Blog/blog.css') }}">
+
 

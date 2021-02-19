@@ -29,7 +29,7 @@ class CategoryController extends Controller
         // Authorize the request
         $this->authorize('view', $obj);
         // Retrieve all records
-        $objs = $obj->getRecords(10);
+        $objs = $obj->getRecords();
 
         $this->componentName = 'themes.'.env('ADMIN_THEME').'.layouts.app';
 

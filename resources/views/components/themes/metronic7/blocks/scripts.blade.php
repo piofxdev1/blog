@@ -6,6 +6,7 @@
 <script src="{{ asset('themes/metronic/plugins/global/plugins.bundle.js?v=7.0.5')}}"></script>
 <script src="{{ asset('themes/metronic/plugins/custom/prismjs/prismjs.bundle.js?v=7.0.5')}}"></script>
 <script src="{{ asset('themes/metronic/js/scripts.bundle.js?v=7.0.5')}}"></script>
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!--end::Global Theme Bundle-->
 
 <!--begin::Page Vendors(used by this page)-->
@@ -15,35 +16,10 @@
 <script src="{{ asset('themes/metronic/plugins/custom/fullcalendar/fullcalendar.bundle.js?v=7.0.5') }}"></script>
 <script src="{{ asset('themes/metronic/plugins/custom/gmaps/gmaps.js?v=7.0.5')}}"></script>
 <script src="{{ asset('themes/metronic/plugins/custom/datatables/datatables.bundle.js?v=7.0.5') }}"></script>
+<script src="{{ asset('themes/metronic/js/pages/crud/file-upload/dropzonejs.js?v=7.0.5') }}"></script>
+<script src="{{ asset('themes/metronic/js/pages/crud/forms/widgets/select2.js?v=7.0.5') }}"></script>
+<script src="{{ asset('themes/metronic/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js?v=7.0.5') }}"></script>
 <!--end::Page Scripts-->
 
-<script>
-    // TinyMCE - WYSIWYG
-    tinymce.init({
-        selector: '.editor',
-        min_height: 500,
-        plugins: [
-        'advlist autolink link image lists charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-        'table emoticons template paste help'
-        ],
-        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image | print preview media fullpage | ' +
-        'forecolor backcolor emoticons | help',
-        menu: {
-        favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
-        },
-        menubar: 'favs file edit view insert format tools table help',
-        statusbar: false,
-        images_upload_url: "upload_image",
-    });
-</script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script> -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
-<script>
-    console.log("hello");
-</script>
+<!-- Custom Js -->
+<script src="{{ asset('js/Blog/blog.js') }}"></script>

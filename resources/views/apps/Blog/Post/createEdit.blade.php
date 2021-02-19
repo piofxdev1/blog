@@ -10,12 +10,11 @@
             <button type="submit" name="publish" value="save_as_draft" class="btn">Save As Draft</button>
             <button type="button" class="btn btn-outline-primary">Preview</button>
             <div class="ml-3">
-                <div class="input-group date border border-primary rounded">
-                    <input type="text" class="form-control" readonly="readonly" placeholder="Schedule"
-                        id="kt_datepicker_3" style="background-color: #fff !important;" />
+                <div class="input-group date">
+                    <input type="text" class="form-control bg-white" readonly="readonly" placeholder="Schedule" id="kt_datetimepicker_2" />
                     <div class="input-group-append">
-                        <span class="input-group-text" style="background-color: #fff !important;">
-                            <i class="la la-calendar"></i>
+                        <span class="input-group-text">
+                            <i class="la la-calendar-check-o glyphicon-th"></i>
                         </span>
                     </div>
                 </div>
@@ -40,42 +39,41 @@
                             Create a Blog Post
                         </h3>
                         <input type="text" id="title" onkeyup="createSlug()"
-                            class="form-control h-auto bg-light px-3 py-4 mb-2 border-0 rounded-lg font-size-h6"
+                            class="form-control h-auto border-0 shadow-sm px-3 py-4 mb-2 font-size-h6"
                             name="title" placeholder="Title" value="@if($stub == 'update'){{$obj ? $obj->title : ''}}@endif"/>
                         <input type="text" id="slug"
-                            class="form-control h-auto bg-light px-3 py-3 mb-3 border-0 rounded-lg font-size-h6"
+                            class="form-control h-auto border-0 shadow-sm px-3 py-3 mb-3 font-size-h6"
                             name="slug" placeholder="Slug" value="@if($stub == 'update'){{$obj ? $obj->slug : ''}}@endif"/>
                         <input type="text"
-                            class="form-control h-auto bg-light px-3 py-3 mb-3 border-0 rounded-lg font-size-h6"
+                            class="form-control h-auto border-0 shadow-sm px-3 py-3 mb-3 font-size-h6"
                             name="excerpt" placeholder="Excerpt" value="@if($stub == 'update'){{$obj ? $obj->excerpt : ''}}@endif"/>
                         <textarea name="content" class="editor" id="editor">@if($stub == 'update'){{$obj ? $obj->content : ''}}@endif</textarea>
                         
                     </div>
+                    <!-- Right Column -->
                     <div class="col-xl-3">
-                        <h3 class="mx-auto">Featured Image</h3>
+                        <div class="p-3 bg-white rounded shadow-sm my-3">
+                            <h3 class="d-flex align-items-center"><i class="far fa-image mr-3 text-primary"></i>Featured Image</h3>
                             <input type="text" hidden name="image" value="https://source.unsplash.com/random/1920x1080">
                             <!-- Dropzone -->
-                            <div id="dropzoneExample1" class="js-dropzone dz-dropzone dz-dropzone-boxed gradient-overlay-half-primary-v4 my-3">
-                            <div class="dz-message py-6">
-                                <figure class="max-w-10rem mx-auto mb-3">
-                                <img class="img-fluid" src="{{ asset('themes/front/svg/illustrations/drag-n-drop.svg') }}" alt="Image Description">
-                                </figure>
-                                <span class="d-block">Drag files here to upload</span>
-                            </div>
-                            </div>
+                                <div class="dropzone dropzone-default dropzone-primary my-3" id="kt_dropzone_1">
+                                    <div class="dropzone-msg dz-message needsclick">
+                                        <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+                                    </div>
+                                </div>
                             <!-- End Dropzone -->
-                        <div class="accordion bg-white" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button font-size-h3" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        Meta Data
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse show"
-                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                        </div>
+                        
+
+                        <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+                            <div class="card">
+                                <div class="card-header" id="headingOne6">
+                                    <div class="card-title bg-white" data-toggle="collapse" data-target="#collapseOne1">
+                                        <i class="fas fa-cookie"></i> Meta Data
+                                    </div>
+                                </div>
+                                <div id="collapseOne1" class="collapse show" data-parent="#accordionExample6">
+                                    <div class="card-body">
                                         <!--begin::Form Group-->
                                         <div class="form-group">
                                             <input type="text"
@@ -89,65 +87,58 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed font-size-h3" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo">
-                                        Categories
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse"
-                                    aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <form>
-                                            <div class="form-group row">
-                                                <div class="col-sm-10">
-                                                    <!-- Select -->
-                                                    <select class="js-custom-select" data-hs-select2-options='{"placeholder": "Select Category"}' name="category_id">
-                                                        @foreach($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                        @endforeach                                                
-                                                    </select>
-                                                    <!-- End Select -->
-                                                </div>
-                                            </div>
-                                        </form>
+                            <div class="card">
+                                <div class="card-header" id="headingOne6">
+                                    <div class="card-title collapsed bg-white" data-toggle="collapse" data-target="#collapseOne2">
+                                        <i class="fas fa-stream"></i> Categories
+                                    </div>
+                                </div>
+                                <div id="collapseOne2" class="collapse show" data-parent="#accordionExample6">
+                                    <div class="card-body">
+                                        <select class="form-control select2" id="kt_select2_1" name="category_id">
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}" selected ="@if($stub == 'update') $obj->category_id == $category->id ? {{ 'selected' }} : '' @endif">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed font-size-h3" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                        aria-expanded="false" aria-controls="collapseThree">
-                                        Tags
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-header" id="headingOne6">
+                                    <div class="card-title collapsed bg-white" data-toggle="collapse" data-target="#collapseOne3">
+                                        <i class="fas fa-tags"></i> Tags
+                                    </div>
+                                </div>
+                                <div id="collapseOne3" class="collapse" data-parent="#accordionExample6">
+                                    <div class="card-body">
                                         <!------begin Tags------>
-                                        <div class="mb-3">
-                                            <!-- Select -->
-                                            <select class="js-custom-select" multiple
-                                                    data-hs-select2-options='{
-                                                    "minimumResultsForSearch": "Infinity"
-                                                    }' name="tag_ids[]">
+                                            <select class="form-control select2" id="kt_select2_11" name="tag_ids[]" multiple="multiple">
+                                                @if($stub != "update")
+                                                    <option selected="selected">Select Tags</option>
+                                                @endif
+
+                                                @php
+                                                    $tag_ids = [];
+                                                    foreach($obj->tags as $tag){
+                                                        array_push($tag_ids, $tag->id);
+                                                    }
+                                                @endphp
+
                                                 @foreach($tags as $tag)
-                                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                                        <option value="{{ $tag->id }}" @if($stub == 'update') in_array($tag->id, $tag_ids) ? {{ "selected" }} : '' @endif>{{ $tag->name }}</option>
                                                 @endforeach
+                            
                                             </select>
-                                            <!-- End Select -->
-                                        </div>
                                         <!------end Tags-------->
                                     </div>
                                 </div>
                             </div>
-                            <!--end::Body-->
                         </div>
-                        <!--end::Base Table Widget 5-->
+
+
+                       
                     </div>
+                    <!-- end::Right Column -->
                 </div>
                 <!--end::Row-->
             </div>

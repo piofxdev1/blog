@@ -96,46 +96,6 @@
         var select2 = $.HSCore.components.HSSelect2.init($(this));
     });
 
-    // TinyMCE -  Init
-    tinymce.init({
-        selector: '.editor',
-        min_height: 500,
-        plugins: [
-        'advlist autolink link image lists charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-        'table emoticons template paste help'
-        ],
-        toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image | print preview media fullpage | ' +
-        'forecolor backcolor emoticons | help',
-        menu: {
-        favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons'}
-        },
-        menubar: 'favs file edit view insert format tools table help',
-        content_css: 'css/content.css',
-        statusbar: false,
-    });
-
-    // Create Slug from text
-    function slugify(text) {
-        return text
-            .toString()                     // Cast to string
-            .toLowerCase()                  // Convert the string to lowercase letters
-            .normalize('NFD')       // The normalize() method returns the Unicode Normalization Form of a given string.
-            .trim()                         // Remove whitespace from both sides of a string
-            .replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-            .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-    }
-
-
-    // Create slug on keyup in title field
-    function createSlug(){
-        title = document.getElementById("title").value;
-        slug = slugify(title);
-        document.getElementById("slug").value = slug;
-    }
-
     // Dropzone initialization
     $('.dz-dropzone').each(function () {
       // initialization of dropzone file attach module

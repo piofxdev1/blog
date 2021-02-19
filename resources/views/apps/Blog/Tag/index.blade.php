@@ -2,30 +2,40 @@
     <div class="container my-5">
 
         <!-- Actions -->
-        <div class="d-flex justify-content-between align-ites-center my-3">
+        <div class="d-flex justify-content-between align-ites-center bg-white px-3 rounded shadow-sm mb-3">
             <div>
-                <!-- Breadcrumbs -->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-4 font-size-sm ">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('dashboard')}}" class="text-muted text-decoration-none">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href=""  class="text-muted text-decoration-none">{{ ucfirst($app->app) }}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href=""  class="text-muted text-decoration-none">{{ ucfirst($app->module) }}</a>
+                    </li>
+                </ul>
+                <!--end::Breadcrumb-->
             </div>
-            <form action="{{ route($app->module.'.create') }}">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add Record</button>
+            <form action="{{ route($app->module.'.create') }}" class="d-flex align-items-center">
+                <button type="submit" class="btn btn-light-primary font-weight-bold ml-2 d-flex align-items-center"><i class="fas fa-plus fa-sm"></i> Add Record</button>
             </form>
         </div>
         <!-- End Actions -->
 
         <!-- Table -->
-        <table class="table shadow-sm border">
-            <thead class="thead-light">
-                <tr>
+        <div class="bg-white p-3 rounded-lg shadow">
+            <table class="table table-borderless bg-white">
+                <tr class="border-bottom">
                     <th scope="col" class="p-3">#</th>
-                    <th scope="col" class="p-3">Name</th>
+                    <th scope="col" class="p-3">@sortablelink('name', 'Name', ['filter' => 'active, visible'], ['class' => 'text-decoration-none text-dark'])</th>
                     <th scope="col" class="p-3">Slug</th>
                     <th scope="col" class="p-3 text-center">Actions</th>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($objs as $obj)
-                <tr>
-                    <th scope="row" class="px-3 align-middle">{{ $obj->id }}</th>
+                @foreach($objs as $key=>$obj)
+                <tr class="border-bottom">
+                    <th scope="row" class="px-3 align-middle">{{ $key+1 }}</th>
                     <td class="px-3 align-middle">{{ $obj->name }}</td>
                     <td class="px-3 align-middle">{{ $obj->slug }}</td>
                     <td class="px-3 align-middle">
@@ -72,8 +82,8 @@
                     </td>
                 </tr>
                 @endforeach
-            </tbody>
-        </table>
+            </table>
+        </div>
         <!-- End Table -->
     </div>
 </x-dynamic-component>

@@ -28,13 +28,13 @@
             <!-- Table -->
             <table class="table table-borderless bg-white">
                 <tr class="border-bottom">
-                    <th scope="col" class="p-3 text-primary font-weight-bolder">@sortablelink('id', '#', ['filter' => 'active, visible'], ['class' => 'text-decoration-none'])</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder text-decoration-none">@sortablelink('title', 'Title', ['filter' => 'active, visible'], ['class' => 'text-decoration-none'])</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder">Slug</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder">Category</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder">Tags</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder">Status</th>
-                    <th scope="col" class="p-3 text-secondary font-weight-bolder">@sortablelink('created_at', 'Created', ['filter' => 'active, visible'], ['class' => 'text-decoration-none'])</th>
+                    <th scope="col" class="p-3">#</th>
+                    <th scope="col" class="p-3 text-decoration-none">@sortablelink('title', 'Title', ['filter' => 'active, visible'], ['class' => 'text-decoration-none text-dark'])</th>
+                    <th scope="col" class="p-3">Slug</th>
+                    <th scope="col" class="p-3">Category</th>
+                    <th scope="col" class="p-3">Tags</th>
+                    <th scope="col" class="p-3">Status</th>
+                    <th scope="col" class="p-3">@sortablelink('created_at', 'Created', ['filter' => 'active, visible'], ['class' => 'text-decoration-none text-dark'])</th>
                     <th scope="col" class="p-3 text-secondary font-weight-bolder text-center">Actions</th>
                 </tr>
                 @foreach($objs as $key=>$obj)
