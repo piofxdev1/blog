@@ -28,7 +28,7 @@ Route::get("/blog", [PostController::class, "index"])->name("Post.index");
 Route::get("/blog/posts", [PostController::class, "list"])->middleware("auth")->name("Post.list");
 Route::get("/blog/create", [PostController::class, "create"])->middleware("auth")->name("Post.create");
 Route::post("/blog/create", [PostController::class, "store"])->middleware("auth")->name("Post.store");
-Route::post("/blog/upload/image", [PostController::class, "upload"])->middleware("auth")->name("Post.upload");
+Route::post("/blog/upload/image", [PostController::class, "upload_image"])->middleware("auth")->name("Post.upload_image");
 Route::get("/blog/search", [PostController::class, "search"])->name("Post.search");
 Route::get("/blog/{slug}/edit", [PostController::class, "edit"])->middleware("auth")->name("Post.edit");
 Route::put("/blog/{id}", [PostController::class, "update"])->middleware("auth")->name("Post.update");

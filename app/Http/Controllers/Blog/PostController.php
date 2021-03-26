@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Blog\Post as Obj;
 use App\Models\Blog\Category;
@@ -80,12 +81,17 @@ class PostController extends Controller
         $this->authorize('create', $obj);
         
         // Check for when to publish
-        if($request->input('publish') == "now" ){
-            $status = 1;
-        }
-        else if($request->input('publish') == "save_as_draft"){
+        if(!empty($request->input('published_at'))){
             $status = 0;
-        }   
+        }
+        else{
+            if($request->input('publish') == "now" ){
+                $status = 1;
+            }
+            else if($request->input('publish') == "save_as_draft"){
+                $status = 0;
+            }   
+        }
         
         // Store the records
         $obj = $obj->create($request->all() + ['status' => $status]);
@@ -98,7 +104,7 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->route($this->module.'.index');
+        return redirect()->route($this->module.'.posts');
     }
 
     /**
@@ -160,11 +166,16 @@ class PostController extends Controller
         $this->authorize('update', $obj);
 
         // Check for when to publish
-        if($request->input('publish') == "now" ){
-            $status = 1;
-        }
-        else if($request->input('publish') == "save_as_draft"){
+        if(!empty($request->input('published_at'))){
             $status = 0;
+        }
+        else{
+            if($request->input('publish') == "now" ){
+                $status = 1;
+            }
+            else if($request->input('publish') == "save_as_draft"){
+                $status = 0;
+            }   
         }   
 
         //update the resource
@@ -217,7 +228,7 @@ class PostController extends Controller
     // List all Posts
     public function list(Obj $obj){
         // Retrieve all records
-        $objs = $obj->getRecords(5, 'asc');
+        $objs = $obj->getRecords(5, 'desc');
         // Authorize the request
         $this->authorize('create', $obj);
 
@@ -228,9 +239,36 @@ class PostController extends Controller
                 ->with("objs", $objs);    
     }
 
-    public function upload(Request $request){
-        $imgpath = $request->file('file')->store('post', 'public');
-        return response()->json(['location' => "/storage/$imgpath"]);
-    }
+    public function upload_image(){
+
+		$input = Input::all();
+		$rules = array(
+		    'file' => 'image|max:3000',
+		);
+
+		$validation = Validator::make($input, $rules);
+
+		if ($validation->fails())
+		{
+			return Response::make($validation->errors->first(), 400);
+		}
+
+		$file = Input::file('file');
+
+        $extension = File::extension($file['name']);
+        // $directory = path('public').'uploads/'.sha1(time());
+        $filename = sha1(time().time()).".{$extension}";
+
+        // $upload_success = Input::upload('file', $directory, $filename);
+
+        
+        $upload_success = Storage::disk('local')->put('uploads'.$filename, $file);
+
+        if( $upload_success ) {
+        	return Response::json('success', 200);
+        } else {
+        	return Response::json('error', 400);
+        }
+	}
 
 }

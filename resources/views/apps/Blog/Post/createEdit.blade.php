@@ -11,7 +11,7 @@
             <button type="button" class="btn btn-outline-primary">Preview</button>
             <div class="ml-3">
                 <div class="input-group date">
-                    <input type="text" class="form-control bg-white" readonly="readonly" placeholder="Schedule" id="kt_datetimepicker_2" />
+                    <input type="text" class="form-control bg-white" readonly="readonly" name="published_at" value="@if($stub == 'update'){{$obj ? $obj->published_at : ''}}@endif" placeholder="Schedule" id="kt_datetimepicker_2" />
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="la la-calendar-check-o glyphicon-th"></i>
@@ -50,18 +50,21 @@
                         <textarea name="content" class="editor" id="editor">@if($stub == 'update'){{$obj ? $obj->content : ''}}@endif</textarea>
                         
                     </div>
+
                     <!-- Right Column -->
                     <div class="col-xl-3">
                         <div class="p-3 bg-white rounded shadow-sm my-3">
                             <h3 class="d-flex align-items-center"><i class="far fa-image mr-3 text-primary"></i>Featured Image</h3>
                             <input type="text" hidden name="image" value="https://source.unsplash.com/random/1920x1080">
-                            <!-- Dropzone -->
+                            <form action="{{ route($app->module.'.upload_image') }}" class="dropzone">
+                                <!-- Dropzone -->
                                 <div class="dropzone dropzone-default dropzone-primary my-3" id="kt_dropzone_1">
                                     <div class="dropzone-msg dz-message needsclick">
                                         <h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
                                     </div>
                                 </div>
-                            <!-- End Dropzone -->
+                                <!-- End Dropzone -->
+                            </form>
                         </div>
                         
 
@@ -113,9 +116,6 @@
                                     <div class="card-body">
                                         <!------begin Tags------>
                                             <select class="form-control select2" id="kt_select2_11" name="tag_ids[]" multiple="multiple">
-                                                @if($stub != "update")
-                                                    <option selected="selected">Select Tags</option>
-                                                @endif
 
                                                 @php
                                                     $tag_ids = [];
